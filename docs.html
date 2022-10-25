@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PostHTML UI</title>
+    <title>PostHTML X Components</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
       .doc-shadow {
@@ -32,28 +32,37 @@
       margin-bottom: 1.5rem;
     }
 
-    .header-anchor {
-      margin-left: -28px;
-      line-height: 1;
+    .header-anchor,
+    h1 .header-anchor,
+    h2 .header-anchor,
+    h3 .header-anchor {
       color: inherit;
       text-decoration: none;
-      visibility: hidden;
     }
 
-    h1 .header-anchor {
-      margin-left: -34px;
-    }
+    @media only screen and (min-width: 1200px) {
+      .header-anchor {
+        margin-left: -28px;
+        line-height: 1;
+        color: inherit;
+        text-decoration: none;
+        visibility: hidden;
+      }
 
-    h3 .header-anchor {
-      margin-left: -24px;
-    }
+      h1 .header-anchor {
+        margin-left: -34px;
+      }
 
-    .header-anchor:hover,
-    h1:hover .header-anchor,
-    h2:hover .header-anchor,
-    h3:hover .header-anchor{
-      visibility: visible;
-      color: inherit;
+      h3 .header-anchor {
+        margin-left: -24px;
+      }
+
+      .header-anchor:hover,
+      h1:hover .header-anchor,
+      h2:hover .header-anchor,
+      h3:hover .header-anchor {
+        visibility: visible;
+      }
     }
 
     #header-toc .nav-link {
@@ -80,11 +89,7 @@
     <header class="py-3 mb-4">
       <div class="container-lg">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
-          <a href="index.html" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" fill="currentColor" class="bi bi-code-slash me-2" viewbox="0 0 16 16">
-              <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"></path>
-            </svg>
-          </a>
+          <a href="index.html" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none h5">&lt;x-components/&gt;</a>
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li>
               <a class="nav-link px-2 link-dark" href="index.html">Home</a>
@@ -110,7 +115,7 @@
       </div>
     </header>
     <main class="flex-shrink-0">
-      <div class="container">
+      <div class="container-lg">
         <div class="row">
           <div class="col-12 col-xl-3 order-1 order-xl-2 toc">
             <div class="mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-muted">
@@ -540,6 +545,23 @@ posthtml(components({ root: './src' }))
                     <code>true</code>
                   </td>
                   <td style="text-align:left">Boolean value for enable or disable throw an exception.</td>
+                </tr>
+                <tr>
+                  <td style="text-align:center">
+                    <strong>mergeCustomizer</strong>
+                  </td>
+                  <td style="text-align:center">
+                    <code>function</code>
+                  </td>
+                  <td style="text-align:left">
+                    Function callback passed to lodash
+                    <code>mergeWith</code>
+                    for attribute
+                    <code>locals</code>
+                    and
+                    <code>merge:attribute</code>
+                    . By default it's used to concat array.
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -1082,6 +1104,12 @@ You can also notice how the
               <code>class</code>
               attribute of the first node. Let's see in next section more about this.
             </p>
+            <p>
+              You can change how attributes are merged by passing via options a callback function used by lodash method
+              <a href="https://lodash.com/docs/4.17.15#mergeWith">mergeWith</a>
+              .
+By default, it's used to concat array.
+            </p>
             <h3 id="attributes" tabindex="-1">
               <a class="header-anchor" href="#attributes">#</a>
               Attributes
@@ -1442,26 +1470,67 @@ For continue to use current code with this plugin without changing it, see below
           </div>
           <!-- /.modal-header -->
           <div class="modal-body">
-            <h3 id="1.0.0-beta.4-(2022-10-23)" tabindex="-1">
+            <h2 id="1.0.0-beta.8-(2022-10-24)" tabindex="-1">
+              <a class="header-anchor" href="#1.0.0-beta.8-(2022-10-24)">#</a>
+              1.0.0-beta.8 (2022-10-24)
+            </h2>
+            <ul>
+              <li>Fix merge locals with global</li>
+            </ul>
+            <h2 id="1.0.0-beta.7-(2022-10-24)" tabindex="-1">
+              <a class="header-anchor" href="#1.0.0-beta.7-(2022-10-24)">#</a>
+              1.0.0-beta.7 (2022-10-24)
+            </h2>
+            <ul>
+              <li>Replace underscore with lodash</li>
+              <li>
+                Replace deepmerge with lodash method
+                <code>mergeWith</code>
+              </li>
+              <li>
+                Added merge customizer via options for lodash method
+                <code>mergeWith</code>
+              </li>
+            </ul>
+            <h2 id="1.0.0-beta.6-(2022-10-24)" tabindex="-1">
+              <a class="header-anchor" href="#1.0.0-beta.6-(2022-10-24)">#</a>
+              1.0.0-beta.6 (2022-10-24)
+            </h2>
+            <ul>
+              <li>
+                Fix
+                <code>$slots</code>
+                context
+              </li>
+            </ul>
+            <h2 id="1.0.0-beta.5-(2022-10-24)" tabindex="-1">
+              <a class="header-anchor" href="#1.0.0-beta.5-(2022-10-24)">#</a>
+              1.0.0-beta.5 (2022-10-24)
+            </h2>
+            <ul>
+              <li>100% coverage test</li>
+              <li>Fix components with same slot name in the same node</li>
+            </ul>
+            <h2 id="1.0.0-beta.4-(2022-10-23)" tabindex="-1">
               <a class="header-anchor" href="#1.0.0-beta.4-(2022-10-23)">#</a>
               1.0.0-beta.4 (2022-10-23)
-            </h3>
+            </h2>
             <ul>
               <li>Refactor with underscore.js</li>
               <li>Optionally set attributes to any nodes not only the first one</li>
               <li>Added more docs</li>
             </ul>
-            <h3 id="1.0.0-beta.3-(2022-10-21)" tabindex="-1">
+            <h2 id="1.0.0-beta.3-(2022-10-21)" tabindex="-1">
               <a class="header-anchor" href="#1.0.0-beta.3-(2022-10-21)">#</a>
               1.0.0-beta.3 (2022-10-21)
-            </h3>
+            </h2>
             <ul>
               <li>Apply additional plugins to tree</li>
             </ul>
-            <h3 id="1.0.0-beta.2-(2022-10-20)" tabindex="-1">
+            <h2 id="1.0.0-beta.2-(2022-10-20)" tabindex="-1">
               <a class="header-anchor" href="#1.0.0-beta.2-(2022-10-20)">#</a>
               1.0.0-beta.2 (2022-10-20)
-            </h3>
+            </h2>
             <ul>
               <li>First beta release</li>
             </ul>
